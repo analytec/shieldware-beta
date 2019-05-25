@@ -15,7 +15,6 @@ def graph():
         file = request.files['file']
         filename = file.filename
         file.save(os.path.join('csv/', filename))
-        return jsonify({"result": csv_to_list('csv/'+ filename)})
     return render_template('home.html', title='Home')
 
 
