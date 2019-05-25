@@ -45,7 +45,7 @@ def upload_file():
     return '''
     <!doctype html>
     <title>Upload an excel file</title>
-    <h1>Excel file upload (csv, tsv, csvz, tsvz only)</h1>
+    <h1>Excel file upload (.csv file)</h1>
     <form action="" method=post enctype=multipart/form-data>
     <p><input type=file name=file><input type=submit value=Upload>
     </form>
