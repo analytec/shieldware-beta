@@ -7,8 +7,6 @@ from csv_utils import *
 import os
 app = Flask(__name__)
 
-
-
 @app.route('/', methods=['GET', 'POST'])
 def graph():
     if request.method == 'POST':
@@ -16,7 +14,6 @@ def graph():
         filename = file.filename
         file.save(os.path.join('csv/', filename))
     return render_template('home.html', title='Home')
-
 
 @app.route('/tw_graph', methods=['GET', 'POST'])
 def tw_graph():
