@@ -2,8 +2,9 @@ from flask import *
 import twitterdata
 import engine
 from flask import Flask, request, jsonify
-
-
+import csv_utils
+from csv_utils import *
+import os
 app = Flask(__name__)
 
 
@@ -37,7 +38,10 @@ def tw_graph():
 @app.route("/upload", methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        return jsonify({"result": request.get_array(field_name='file')})
+        file = request.files['file']
+        filename = file.filename
+        file.save(os.path.join('csv/', filename))
+        return jsonify({"result": csv_to_list('csv/'+ filename)})
     return '''
     <!doctype html>
     <title>Upload an excel file</title>
