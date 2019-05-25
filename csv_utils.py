@@ -4,7 +4,7 @@ import csv
 def csv_to_list(filename):
     results = []
     with open(filename) as csvfile:
-        filereader = csv.reader(csvfile, quoting=csv.QUOTE_NONNUMERIC) # change contents to floats
+        filereader = csv.reader(csvfile) # change contents to floats
         for row in filereader: # each row is a list
             results.append(row)
     return results
