@@ -9,8 +9,13 @@ app = Flask(__name__)
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def graph():
+    if request.method == 'POST':
+        file = request.files['file']
+        filename = file.filename
+        file.save(os.path.join('csv/', filename))
+        return jsonify({"result": csv_to_list('csv/'+ filename)})
     return render_template('home.html', title='Home')
 
 
@@ -35,21 +40,7 @@ def tw_graph():
             alcohol_vals = alcohol_vals,
             x_vals = x_vals
         )
-@app.route("/upload", methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        filename = file.filename
-        file.save(os.path.join('csv/', filename))
-        return jsonify({"result": csv_to_list('csv/'+ filename)})
-    return '''
-    <!doctype html>
-    <title>Upload an excel file</title>
-    <h1>Excel file upload (.csv file)</h1>
-    <form action="" method=post enctype=multipart/form-data>
-    <p><input type=file name=file><input type=submit value=Upload>
-    </form>
-    '''
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0',port=8080)
