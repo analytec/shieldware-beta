@@ -1,9 +1,6 @@
-from instagram_web_api import Client, ClientCompatPatch, ClientError, ClientLoginError
 from sightengine.client import SightengineClient
 from creds import client_access, client_key
 
-client = SightengineClient(client_access, client_key)
-web_api = Client(auto_patch=True, drop_incompat_keys=False)
 
 def getOutput(my_url_list):
     output_list = []
