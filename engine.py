@@ -1,5 +1,6 @@
 from sightengine.client import SightengineClient
 from creds import client_access, client_key
+client = SightengineClient(client_access, client_key)
 
 
 def getOutput(my_url_list):
