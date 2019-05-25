@@ -1,2 +1,2 @@
 # shieldware-beta
-Beta version for ShieldWare.
+Beta version for shieldware.
