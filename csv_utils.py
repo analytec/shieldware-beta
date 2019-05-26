@@ -7,6 +7,6 @@ def csv_to_list(filename):
         filereader = csv.reader(csvfile) # change contents to floats
         for row in filereader: # each row is a list
             results.append(row)
-    return results
+    return [element[0] for element in results] # return first column (usernames) only
 
 print(csv_to_list('csv/accounts.csv'))
