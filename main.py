@@ -5,14 +5,17 @@ from flask import Flask, request, jsonify
 import csv_utils
 from csv_utils import *
 import os
+from werkzeug.utils import secure_filename
+
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def graph():
     if request.method == 'POST':
         file = request.files['file']
-        filename = file.filename
-        file.save(os.path.join('csv/uploaded/', filename))
+        filename = secure_filename(file.filename)
+        file.save(os.path.join('csv/', filename))
     return render_template('home.html', title='Home')
 
 @app.route('/tw_graph', methods=['GET', 'POST'])
