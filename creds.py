@@ -5,5 +5,12 @@ access_key = "1097354523432017920-mWlifS3sup5mWhZLBXXQKuIJ186rSn"
 access_secret = "Ad6z0qJPxDMr8rHIJGioJLUxofUTLEML6qva3R8Ip87BK"
 
 # SightEngine Client API
-client_access = "67608154"
-client_key = "756T67AahQBhkwg53TVy"
+
+# Temporarily expired tokens
+# client_access = "67608154"
+# client_key = "756T67AahQBhkwg53TVy"
+
+# New tokens
+
+client_access = "630881392"
+client_key = "St5TPUomwvLYq7eiXd4G"
