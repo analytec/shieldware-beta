@@ -3,6 +3,9 @@ import twitterdata
 import engine
 import csv_utils
 import time
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
 
 def twitter_query_wad(username):
     all_tweets = twitterdata.get_all_tweets(username)
@@ -23,12 +26,13 @@ def twitter_bulk_query_wad(user_list, threads=2):
     print(user_list)
 
     pool = mp.Pool(threads)
-    results = pool.map(twitter_query_wad, user_list)
+    pool_results = pool.map(twitter_query_wad, user_list)
+    results = [{user_list[i] : pool_results[i]} for i in range(len(user_list))]
 
     print('twitter_bulk_query_wad() completed.')
     return results
 
 print('\n\n*******************FINAL RESULTS******************************\n')
-result = twitter_bulk_query_wad(['narendramodi', 'POTUS'])
+result = twitter_bulk_query_wad(csv_utils.csv_to_list('csv/accounts.csv'), 4)
 print('Finished')
-print(result)
+pp.pprint(result)
