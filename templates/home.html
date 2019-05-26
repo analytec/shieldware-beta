@@ -3,6 +3,8 @@
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <meta charset="UTF-8">
     <title>Home | ShieldWare</title>
   </head>
@@ -31,7 +33,7 @@
       width: 30vw;
       min-width: 100px;
       text-align: center;
-      height: 150px;
+      height: 250px;
       margin: 5% auto;
       background-color: #ccc;
       padding-top: 20px;
@@ -39,6 +41,14 @@
       text-align: left;
       padding-left: 20px;
   }
+  .row {
+  white-space: nowrap;
+}
+
+.row > div {
+  width: 220px;
+  display: inline-block;
+}
   </style>
   <body>
         <h1> <center><img src="/static/logo.jpg" width="300" height="300"></center></img> </h1>
@@ -46,11 +56,20 @@
     <form action="/tw_graph" method="post">
       <p><strong>Twitter Username:</strong></p>
         <input id="username-tw" name="username-tw">
-        <input name="submit" type="submit" value="Search">
+        <input class="w3-btn w3-blue" name="submit" type="submit" value="Search">
     </form>
-      <h1>Import Spreadsheet...</h1>
+
+
+    <strong> Import Spreadsheet...</strong>
+
       <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file><input type=submit value=Upload>
+        <div class="row">
+
+        <div><input type=file name=file></div>
+
+        <div><input class="w3-btn w3-blue" type=submit value="Bulk Query"></div>
+      </div>
+
       </form>
     <br>
   </div>
