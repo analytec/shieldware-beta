@@ -12,7 +12,7 @@ def graph():
     if request.method == 'POST':
         file = request.files['file']
         filename = file.filename
-        file.save(os.path.join('csv/', filename))
+        file.save(os.path.join('csv/uploaded/', filename))
     return render_template('home.html', title='Home')
 
 @app.route('/tw_graph', methods=['GET', 'POST'])
