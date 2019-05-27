@@ -55,9 +55,11 @@
     }
   </style>
   <body>
-
+    <ul>
     {% for username in usernames %}
-      {{ username }}
+
+      <li><a href="tw_graph/{{username}}">{{ username }}</a></li>
     {% endfor %}
+  </ul>
 
   </body>
