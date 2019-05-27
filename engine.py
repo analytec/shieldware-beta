@@ -53,11 +53,13 @@ def twitter_query_wad(username):
     drug_vals = checkDrugs(tweets_output)
 
     print('Data acquired for user: ' + username)
-    return ({
+    result = {
         'weapons' : weapon_vals,
         'alcohol' : alcohol_vals,
         'drugs'   : drug_vals
-    })
+    }
+    all_data[username] = result
+    return result
 
 # twitter_bulk_query_wad() - process and return the Weapons/Alcohol/Drugs content of multiple Twitter usernames
 # example usage: twitter_bulk_query_wad(['POTUS', 'narendramodi'], threads=4)

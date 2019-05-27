@@ -41,13 +41,11 @@ def dashboard_display():
 def data():
     if request.method == 'POST':
         username = str(request.form['username-tw'])
-        all_tweets = twitterdata.get_all_tweets(username)#
-        x_vals = engine.gen_list(10)
-        username = str(request.form['username-tw'])
-        data = engine.all_data[username]
-        return redirect(url_for('tw_graph', username=username)
+        result = engine.twitter_query_wad(username)
+        print(engine.all_data)
+        return redirect(url_for('tw_graph', username=username))
 
-@app.route('/tw_graph', methods=['GET', 'POST'])
+@app.route('/tw_graph/<username>', methods=['GET', 'POST'])
 def tw_graph(username):
     #if request.method == 'POST':
     x_vals = engine.gen_list(10)
