@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
-def graph():
+def home():
     if request.method == 'POST':
         file = request.files['file']
         filename = secure_filename(file.filename)
