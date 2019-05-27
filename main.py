@@ -45,12 +45,11 @@ def data():
         x_vals = engine.gen_list(10)
         username = str(request.form['username-tw'])
         data = engine.all_data[username]
-        return redirect(url_for('tw_graph',username=username)
+        return redirect(url_for('tw_graph', username=username)
 
 @app.route('/tw_graph', methods=['GET', 'POST'])
 def tw_graph(username):
     #if request.method == 'POST':
-    username = str(request.form['username-tw'])
     x_vals = engine.gen_list(10)
     data = engine.all_data[username]
     return render_template(
