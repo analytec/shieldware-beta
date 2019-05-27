@@ -6,6 +6,8 @@ from sightengine.client import SightengineClient
 from creds import client_access, client_key
 client = SightengineClient(client_access, client_key)
 
+all_data = {
+}
 
 def getOutput(my_url_list):
     output_list = []
@@ -66,7 +68,10 @@ def twitter_bulk_query_wad(user_list, threads=2):
     pool = mp.Pool(threads)
     pool_results = pool.map(twitter_query_wad, user_list)
     results = [{user_list[i] : pool_results[i]} for i in range(len(user_list))]
+    for key, value in results:
+        all_data[key] = result[key]
 
     print('twitter_bulk_query_wad() completed.')
-    pp.pprint(results)
+    print("ALL DATA SO FAR: ")
+    pp.pprint(all_data)
     return results
