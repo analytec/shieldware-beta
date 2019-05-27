@@ -6,8 +6,7 @@ from sightengine.client import SightengineClient
 from creds import client_access, client_key
 client = SightengineClient(client_access, client_key)
 
-all_data = {
-}
+all_data = {} # DO NOT DELETE THIS LINE
 
 def getOutput(my_url_list):
     output_list = []
