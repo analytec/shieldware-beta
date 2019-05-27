@@ -27,7 +27,7 @@
 
 
     <h1>{{name}}</h1>
-    <canvas id="chart" width="250" height="300"></canvas>
+    <canvas id="chart" width="320" height="300"></canvas>
     <script>
       // bar chart data
       var barData = {
@@ -52,8 +52,8 @@
         ]
       }
       var mychart = document.getElementById("chart").getContext("2d");
-      steps = 0.25
-      max = {{drug_max}}
+      steps = 0.001
+      max = 1
       // draw bar chart
       var LineChartDemo = new Chart(mychart).Line(barData, {
         scaleOverride: true,
@@ -68,7 +68,7 @@
       });
     </script>
 
-<canvas id="chart2" width="250" height="300"></canvas>
+<canvas id="chart2" width="320" height="300"></canvas>
 <script>
 
 
@@ -94,8 +94,8 @@
     ]
   }
   var mychart = document.getElementById("chart2").getContext("2d");
-  steps = 0.25
-  max = {{weapon_max}}
+  steps = 0.001
+  max = 1
 
 
   var LineChartDemo = new Chart(mychart).Line(barData, {
@@ -111,7 +111,7 @@
   });
 </script>
 
-<canvas id="chart3" width="250" height="300"></canvas>
+<canvas id="chart3" width="320" height="300"></canvas>
 <script>
 
 
@@ -137,8 +137,8 @@
     ]
   }
   var mychart = document.getElementById("chart3").getContext("2d");
-  steps = 0.25
-  max = {{alcohol_max}}
+  steps = 0.001
+  max = 1
 
 
   var LineChartDemo = new Chart(mychart).Line(barData, {

@@ -25,16 +25,11 @@ def dashboard_display():
         file = request.files['file']
         filename = secure_filename(file.filename)
         file.save(os.path.join('csv/', filename))
-        bulk_dict = twitter_bulk_query_wad(csv_to_list('csv/' + filename), threads=4)
-
-        return render_template(
-            'tw_graph.html',
-            name = username,
-            drug_vals = drug_vals,
-            weapon_vals = weapon_vals,
-            alcohol_vals = alcohol_vals,
-            x_vals = x_vals
-        )
+        usernames = csv_to_list('csv/' + filename)
+        bulk_dict = engine.twitter_bulk_query_wad(usernames, threads=4)
+        for username in bulk_dict:
+            usernames.append()
+        return render_template('dashboard.html', usernames = usernames)
 
 
 @app.route('/data', methods=['GET','POST'])
@@ -48,8 +43,12 @@ def data():
 @app.route('/tw_graph/<username>', methods=['GET', 'POST'])
 def tw_graph(username):
     #if request.method == 'POST':
-    x_vals = engine.gen_list(10)
+    x_vals = engine.gen_list(11)
     data = engine.all_data[username]
+    print('WEAPON MAX: ' + str(max(data['weapons'])))
+    print('DRUGS MAX: ' + str(max(data['drugs'])))
+    print('ALCOHOL MAX: ' + str(max(data['alcohol'])))
+
     return render_template(
         'tw_graph.html',
         name = username,
