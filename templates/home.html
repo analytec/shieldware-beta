@@ -62,7 +62,7 @@ drift.load('9six78nrtm3y');
       width: 30vw;
       min-width: 100px;
       text-align: center;
-      height: 220px;
+      height: 350px;
       margin: 5% auto;
       background-color: #ccc;
       padding-top: 20px;
@@ -96,16 +96,19 @@ h1 {
         <input class="w3-btn w3-blue" name="submit" type="submit" value="Search">
     </form>
 
-
-    <strong> Import Spreadsheet...</strong>
-
+</br>
+--------------------------------------------------
+</br>
+</br>
+    <p><strong> Import Spreadsheet...</strong></p>
       <form action="/dashboard" method=post enctype=multipart/form-data>
         <div class="row">
 
         <div><input type=file name=file></div>
 
-        <div><input class="w3-btn w3-blue" type=submit value="Bulk Query"></div>
       </div>
+      <div>Number of Processors <input type=number value="2" min="2" max="2"></div>
+      <div><input class="w3-btn w3-blue" type=submit value="Bulk Query"></div>
 
       </form>
     <br>

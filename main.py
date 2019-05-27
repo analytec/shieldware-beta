@@ -21,9 +21,7 @@ def home():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard_display():
     if request.method == 'POST':
-        print(request.form)
         processor_count = int(request.form['processor-count'])
-        usernames = []
         file = request.files['file']
         filename = secure_filename(file.filename)
         file.save(os.path.join('csv/', filename))
