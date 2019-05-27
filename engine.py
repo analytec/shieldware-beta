@@ -69,8 +69,8 @@ def twitter_bulk_query_wad(user_list, threads=2):
     pool = mp.Pool(threads)
     pool_results = pool.map(twitter_query_wad, user_list)
     results = [{user_list[i] : pool_results[i]} for i in range(len(user_list))]
-    for key, value in results:
-        all_data[key] = result[key]
+    for key in results:
+        all_data[key] = results[key]
 
     print('twitter_bulk_query_wad() completed.')
     print("ALL DATA SO FAR: ")
