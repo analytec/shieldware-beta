@@ -34,7 +34,7 @@ def dashboard_display():
 def data():
     if request.method == 'POST':
         username = str(request.form['username-tw'])
-        result = engine.twitter_query_wad(username)
+        result = engine.concurrent_twitter_query_wad(username, threads=6)
         print(engine.all_data)
         return redirect(url_for('tw_graph', username=username))
 

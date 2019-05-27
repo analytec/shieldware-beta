@@ -45,6 +45,33 @@ def gen_list(count):
 
 pp = pprint.PrettyPrinter(indent=4)
 
+# helper function - DO NOT use this outside this file
+def wad_helper(output_list, query_type):
+    results = []
+    for output in output_list:
+        print(output)
+        res = output[query_type]
+        results.append(res)
+    return results
+
+def concurrent_twitter_query_wad(username, threads):
+    all_tweets = twitterdata.get_all_tweets(username)
+    tweets_output = getOutput(all_tweets)
+    pool = mp.Pool(threads)
+    pool_results = pool.starmap(wad_helper, [(tweets_output, 'weapon'), (tweets_output, 'drugs'), (tweets_output, 'alcohol')])
+    weapon_vals = pool_results[0]
+    drug_vals = pool_results[1]
+    alcohol_vals = pool_results[2]
+    print('Data acquired concurrently for user: ' + username)
+    result = {
+        'weapons' : weapon_vals,
+        'alcohol' : alcohol_vals,
+        'drugs'   : drug_vals
+    }
+    all_data[username] = result
+    return result
+
+
 def twitter_query_wad(username):
     all_tweets = twitterdata.get_all_tweets(username)
     tweets_output = getOutput(all_tweets)
