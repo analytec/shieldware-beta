@@ -7,10 +7,11 @@ access_secret = "Ad6z0qJPxDMr8rHIJGioJLUxofUTLEML6qva3R8Ip87BK"
 # SightEngine Client API
 
 # Temporarily expired tokens
+# SET #1
 # client_access = "67608154"
 # client_key = "756T67AahQBhkwg53TVy"
 
 # New tokens
-
+# SET #2
 client_access = "630881392"
 client_key = "St5TPUomwvLYq7eiXd4G"
