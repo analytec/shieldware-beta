@@ -18,6 +18,8 @@ def graph():
         file.save(os.path.join('csv/', filename))
     return render_template('home.html', title='Home')
 
+
+
 @app.route('/tw_graph', methods=['GET', 'POST'])
 def tw_graph():
     if request.method == 'POST':
