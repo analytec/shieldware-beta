@@ -55,9 +55,12 @@ def tw_graph():
         return render_template(
             'tw_graph.html',
             name = username,
-            drug_vals = drug_vals,
-            weapon_vals = weapon_vals,
-            alcohol_vals = alcohol_vals,
+            drug_vals = data['drugs'],
+            drug_max = max(data['drugs']),
+            weapon_vals = data['weapons'],
+            weapon_max = max(data['weapons']),
+            alcohol_vals = data['alcohol'],
+            alcohol_max = max(data['alcohol']),
             x_vals = x_vals
         )
 
