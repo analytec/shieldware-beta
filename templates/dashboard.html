@@ -48,10 +48,11 @@ drift.load('9six78nrtm3y');
         font-size: 30px;
         background-color: teal;
         opacity: 0.8;
-    }
+    };
     p {
       color: white;
       font: 20px sans-serif;
+
     }
     h3 {
       font-size: 15px;
@@ -61,33 +62,40 @@ drift.load('9six78nrtm3y');
       width: 30vw;
       min-width: 100px;
       text-align: center;
-      height: 220px;
+      height: 550px;
       margin: 5% auto;
       background-color: #ccc;
       padding-top: 20px;
       padding-bottom: 20px;
       text-align: left;
       padding-left: 20px;
-    }
-    .row {
-      white-space: nowrap;
-    }
-    .row > div {
-      width: 220px;
-      display: inline-block;
-    }
-    h1 {
-      font-family: 'Ramabhadra', sans-serif;
-      color: white;
-      font-size: 100px;
-    }
+  }
+  .row {
+  white-space: nowrap;
+}
+
+.row > div {
+  width: 220px;
+  display: inline-block;
+}
+h1 {
+  font-family: 'Ramabhadra', sans-serif;
+  color: white;
+  font-size: 100px;
+
+}
+input[type=number]{
+    width: 40px;
+}
   </style>
   <body>
+    <div class="image-example">
     <ul>
     {% for username in usernames %}
 
       <li><a href="tw_graph/{{username}}">{{ username }}</a></li>
     {% endfor %}
   </ul>
+</div>
 
   </body>
