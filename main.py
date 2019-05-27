@@ -26,7 +26,6 @@ def dashboard_display():
         filename = secure_filename(file.filename)
         file.save(os.path.join('csv/', filename))
         usernames = csv_to_list('csv/' + filename)
-        bulk_dict = engine.twitter_bulk_query_wad(usernames, threads=processor_count)
         return render_template('dashboard.html', usernames = usernames)
 
 
@@ -60,4 +59,4 @@ def tw_graph(username):
     )
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0',port=8080)
+    app.run(debug=True, host='localhost',port=8080)
