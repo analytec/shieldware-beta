@@ -9,12 +9,7 @@
     <meta charset="UTF-8">
     <title>Home | ShieldWare</title>
     <!-- Start of Async Drift Code -->
-    <script type="text/javascript">// <![CDATA[
-        function loading(){
-            $("#loading").show();
-            $("#content").hide();
-        }
-// ]]></script>
+    <
 <script>
 "use strict";
 
@@ -120,19 +115,19 @@ div#loading {
   }
   </style>
   <script>
-function move() {
-  var elem = document.getElementById("myBar");
-  var width = 1;
-  var id = setInterval(frame, 10);
-  function frame() {
-    if (width >= 100) {
-      clearInterval(id);
-    } else {
-      width=width+(100/60);
-      elem.style.width = width + '%';
+  function move() {
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+      } else {
+        width=width+.02;
+        elem.style.width = width + '%';
+      }
     }
   }
-}
 </script>
 
   <body>
@@ -162,13 +157,10 @@ function move() {
     <p><strong> Import Spreadsheet...</strong></p>
       <form action="/dashboard" method=post enctype=multipart/form-data>
         <div class="row">
-
         <div><input type=file name=file></div>
-
       </div>
       <div>Number of Processors <input id="processor-count" name="processor-count" type=number value="2" min="2" max="18"></div>
       <div><input class="w3-btn w3-blue" type=submit value="Bulk Query"></div>
-
       </form>
     <br>
   </div>
