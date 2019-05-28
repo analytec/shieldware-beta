@@ -81,7 +81,7 @@ drift.load('9six78nrtm3y');
 }
 
 .row > div {
-  width: 220px;
+  width: 785px;
   display: inline-block;
 }
 h1 {
@@ -101,15 +101,23 @@ div#loading {
     cursor: wait;
     }
     #myProgress {
-      width: 100%;
+      width: 300px;
+      float: right;
       background-color: #ddd;
     }
-
     #myBar {
       width: 1%;
+      float: left;
       height: 30px;
       background-color: #4CAF50;
     }
+  }
+  .center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
   </style>
   <script>
 function move() {
@@ -120,7 +128,7 @@ function move() {
     if (width >= 100) {
       clearInterval(id);
     } else {
-      width++;
+      width=width+1;
       elem.style.width = width + '%';
     }
   }
@@ -130,11 +138,17 @@ function move() {
   <body>
     <center>
     <h1> <strong>Shieldware </strong></h1>
-    <div id="myProgress">
- <div id="myBar"></div>
-</div>
+
   </center>
+  <div class="row">
+<div>
+  <div id="myProgress">
+<div id="myBar"></div>
+</div>
+</div>
+</div>
         <div class="image-example">
+
     <form action="/data" method="post">
       <p><strong>Twitter Username:</strong></p>
         <input id="username-tw" name="username-tw">
