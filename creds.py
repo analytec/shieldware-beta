@@ -21,3 +21,6 @@ client_key = "756T67AahQBhkwg53TVy"
 # SET #3
 #client_access = "411695319"
 #client_key = "4WwecUhAmadQFnqMwAmd"
+
+auth_token_prelim = 'tigertech'
+auth_token_penult = 'admin'
