@@ -36,17 +36,19 @@ def dashboard_display():
         try:
             selected_file = request.files['file']
         except Exception as e:
-            return render_template('home.html', error=str(e))
+            return render_template('home.html', errorcsv=str(e))
         filename = secure_filename(selected_file.filename)
-        selected_file.save(os.path.join('csv/', filename))
         if filename.endswith(".csv") == False:
             error = "Please select a .csv file!"
             return render_template('home.html',errorcsv=error)
+        else:
+            selected_file.save(os.path.join('csv/', filename))
+
         usernames = csv_to_list('csv/' + filename)
         try:
             engine.twitter_bulk_query_wad(usernames, threads=processor_count)
         except Exception as e:
-            return render_template('home.html', error=str(e))
+            return render_template('home.html', errorcsv=str(e))
         return render_template('dashboard.html', usernames = usernames)
 
 
