@@ -9,6 +9,12 @@
     <meta charset="UTF-8">
     <title>Home | ShieldWare</title>
     <!-- Start of Async Drift Code -->
+    <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();
+        }
+// ]]></script>
 <script>
 "use strict";
 
@@ -87,16 +93,52 @@ h1 {
 input[type=number]{
     width: 40px;
 }
+div#loading {
+    width: 35px;
+    height: 35px;
+    display: none;
+    background: url(/static/loading.gif) no-repeat;
+    cursor: wait;
+    }
+    #myProgress {
+      width: 100%;
+      background-color: #ddd;
+    }
+
+    #myBar {
+      width: 1%;
+      height: 30px;
+      background-color: #4CAF50;
+    }
   </style>
+  <script>
+function move() {
+  var elem = document.getElementById("myBar");
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%';
+    }
+  }
+}
+</script>
+
   <body>
     <center>
     <h1> <strong>Shieldware </strong></h1>
+    <div id="myProgress">
+ <div id="myBar"></div>
+</div>
   </center>
         <div class="image-example">
     <form action="/data" method="post">
       <p><strong>Twitter Username:</strong></p>
         <input id="username-tw" name="username-tw">
-        <input class="w3-btn w3-blue" name="submit" type="submit" value="Search">
+        <input class="w3-btn w3-blue" name="submit" type="submit" value="Search" onclick="move()">
     </form>
 
 </br>
