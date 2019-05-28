@@ -6,7 +6,7 @@ from sightengine.client import SightengineClient
 from creds import client_access, client_key, all_creds
 client = SightengineClient(client_access, client_key)
 
-all_data = {} # DO NOT DELETE THIS LINE
+all_data = {}
 
 def choose_api_key():
     global client
@@ -34,6 +34,8 @@ def getOutput(my_url_list):
         print(result)
     for output in output_list:
         print(output)
+        output_list.append(client.check('wad').set_url(my_url))
+    for output in output_list:  print(output)
     return output_list
 
 def checkDrugs(output_list):
