@@ -21,19 +21,6 @@ def getOutput(my_url_list):
     output_list = []
     result = None
     for my_url in my_url_list:
-        # API switching code
-        for pair in all_creds:
-            print('in loop in getOutput')
-            global client
-            #nonlocal result
-            client = SightengineClient(pair[0], pair[1])
-            result = client.check('wad').set_url(my_url)
-            if result['status'] == 'success':
-                break
-        output_list.append(result)
-        print(result)
-    for output in output_list:
-        print(output)
         output_list.append(client.check('wad').set_url(my_url))
     for output in output_list:  print(output)
     return output_list
@@ -96,6 +83,7 @@ def concurrent_twitter_query_wad(username, threads):
 
 
 def twitter_query_wad(username):
+    global all_data
     all_tweets = twitterdata.get_all_tweets(username)
     tweets_output = getOutput(all_tweets)
     weapon_vals = checkWeapons(tweets_output)

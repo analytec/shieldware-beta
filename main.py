@@ -26,6 +26,7 @@ def dashboard_display():
         filename = secure_filename(file.filename)
         file.save(os.path.join('csv/', filename))
         usernames = csv_to_list('csv/' + filename)
+        engine.twitter_bulk_query_wad(usernames, threads=processor_count)
         return render_template('dashboard.html', usernames = usernames)
 
 
