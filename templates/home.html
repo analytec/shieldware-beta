@@ -63,7 +63,7 @@ drift.load('9six78nrtm3y');
       width: 30vw;
       min-width: 100px;
       text-align: center;
-      height: 350px;
+      height: 380px;
       margin: 5% auto;
       background-color: #ccc;
       padding-top: 20px;
@@ -82,8 +82,11 @@ drift.load('9six78nrtm3y');
 h1 {
   font-family: 'Ramabhadra', sans-serif;
   color: white;
-  font-size: 100px;
+  font-size: 80px;
 
+}
+.error {
+  color: red;
 }
 input[type=number]{
     width: 40px;
@@ -149,6 +152,9 @@ div#loading {
         <input id="username-tw" name="username-tw">
         <input class="w3-btn w3-blue" name="submit" type="submit" value="Search" onclick="move()">
     </form>
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
+      {% endif %}
 
 </br>
 --------------------------------------------------

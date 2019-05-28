@@ -12,11 +12,14 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    error=None
     if request.method == 'POST':
+        error=None
         file = request.files['file']
         filename = secure_filename(file.filename)
+
         file.save(os.path.join('csv/', filename))
-    return render_template('home.html', title='Home')
+    return render_template('home.html', title='Home', error=error)
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard_display():
@@ -34,6 +37,12 @@ def dashboard_display():
 def data():
     if request.method == 'POST':
         username = str(request.form['username-tw'])
+        if not username:
+            error = "Please enter a username before searching!"
+            return render_template('home.html', error=error)
+        elif not engine.check_user_exists(username):
+            error = "Twitter user does not exist!"
+            return render_template('home.html', error=error)
         result = engine.concurrent_twitter_query_wad(username, threads=6)
         print(engine.all_data)
         return redirect(url_for('tw_graph', username=username))

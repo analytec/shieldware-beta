@@ -5,21 +5,12 @@ import pprint
 from sightengine.client import SightengineClient
 from creds import client_access, client_key, all_creds
 client = SightengineClient(client_access, client_key)
-
+import requests
+import json
 all_data = {}
-
-def choose_api_key():
-    global client
-    for pair in all_creds:
-        client = SightengineClient(pair[0], pair[1])
-        result = client.check('wad').set_url('https://lh3.googleusercontent.com/-EL0JJV39VAs/XOyDvKml4NI/AAAAAAAADPA/QEYS42h75H0KvxzUToVi3kBGmqKzlNZtQCK8BGAs/s512/2019-05-27.jpg')['result']
-        if result == 'success':
-            print("Using API credentials " + str(pair))
-            break
 
 def getOutput(my_url_list):
     output_list = []
-    result = None
     for my_url in my_url_list:
         output_list.append(client.check('wad').set_url(my_url))
     for output in output_list:  print(output)
@@ -115,3 +106,12 @@ def twitter_bulk_query_wad(user_list, threads=2):
     print("ALL DATA SO FAR: ")
     pp.pprint(all_data)
     return results
+
+def check_user_exists(user):
+    my_response = requests.get("https://twitter.com/users/username_available?username="+str(user))
+    my_response = my_response._content
+    my_response = my_response.decode("utf-8")
+    my_response = my_response.replace("''","\"")
+    my_response = json.loads(my_response)
+    my_response = my_response['valid']
+    return not my_response
