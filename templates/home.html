@@ -166,6 +166,9 @@ div#loading {
         <div><input type=file name=file></div>
       </div>
       <div>Number of Processors <input id="processor-count" name="processor-count" type=number value="2" min="2" max="18"></div>
+      {% if errorcsv %}
+          <p class="error"><strong>Error:</strong> {{ errorcsv }}</p>
+        {% endif %}
       <div><input class="w3-btn w3-blue" type=submit value="Bulk Query"></div>
       </form>
     <br>

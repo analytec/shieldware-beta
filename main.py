@@ -19,15 +19,20 @@ def home():
         filename = secure_filename(file.filename)
 
         file.save(os.path.join('csv/', filename))
-    return render_template('home.html', title='Home', error=error)
+    return render_template('home.html', error=error)
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard_display():
+    error=None
     if request.method == 'POST':
+        error=None
         processor_count = int(request.form['processor-count'])
         file = request.files['file']
         filename = secure_filename(file.filename)
         file.save(os.path.join('csv/', filename))
+        if filename.endswith(".csv") == False:
+            error = "Please select a .csv file!"
+            return render_template('home.html',errorcsv=error)
         usernames = csv_to_list('csv/' + filename)
         engine.twitter_bulk_query_wad(usernames, threads=processor_count)
         return render_template('dashboard.html', usernames = usernames)
