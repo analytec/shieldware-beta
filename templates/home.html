@@ -100,17 +100,45 @@ div#loading {
     background: url(/static/loading.gif) no-repeat;
     cursor: wait;
     }
+    #myProgress {
+      width: 100%;
+      background-color: #ddd;
+    }
+
+    #myBar {
+      width: 1%;
+      height: 30px;
+      background-color: #4CAF50;
+    }
   </style>
+  <script>
+function move() {
+  var elem = document.getElementById("myBar");
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%';
+    }
+  }
+}
+</script>
+
   <body>
     <center>
     <h1> <strong>Shieldware </strong></h1>
-     <div id="loading"></div>
+    <div id="myProgress">
+ <div id="myBar"></div>
+</div>
   </center>
         <div class="image-example">
     <form action="/data" method="post">
       <p><strong>Twitter Username:</strong></p>
         <input id="username-tw" name="username-tw">
-        <input class="w3-btn w3-blue" name="submit" type="submit" value="Search" onclick="loading();">
+        <input class="w3-btn w3-blue" name="submit" type="submit" value="Search" onclick="move()">
     </form>
 
 </br>
