@@ -46,7 +46,7 @@ def tw_graph(username):
     print('DRUGS MAX: ' + str(max(data['drugs'])))
     print('ALCOHOL MAX: ' + str(max(data['alcohol'])))
 
-    return render_template(
+    return  render_template(
         'tw_graph.html',
         name = username,
         drug_vals = data['drugs'],
