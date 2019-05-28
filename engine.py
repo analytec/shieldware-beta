@@ -8,9 +8,19 @@ client = SightengineClient(client_access, client_key)
 
 all_data = {} # DO NOT DELETE THIS LINE
 
+def choose_api_key():
+    global client
+    for pair in creds.all_creds:
+        client = SightengineClient(pair[0], pair[1])
+        result = client.check('wad')['status']
+        if result == success:
+            print("Using API credentials " + str(pair))
+            break
+
 def getOutput(my_url_list):
     output_list = []
     for my_url in my_url_list:
+        choose_api_key()
         output_list.append(client.check('wad').set_url(my_url))
     for output in output_list:  print(output)
     return output_list
