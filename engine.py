@@ -27,7 +27,6 @@ def getOutput(my_url_list):
             result = client.check('wad').set_url(my_url)
             print('Using credentials ' + all_creds[current_cred][0] + ', ' + all_creds[current_cred][1])
             print(result)
-            print(result['status'])
         print(result)
         output_list.append(result)
     for output in output_list:  print(output)
@@ -74,6 +73,8 @@ def wad_helper(output_list, query_type):
     sys.exit(0)
 
 def concurrent_twitter_query_wad(username, threads):
+    if current_cred >= len(all_creds):
+        raise Exception('API keys exhausted.')
     all_tweets = twitterdata.get_all_tweets(username)
     tweets_output = getOutput(all_tweets)
     pool = mp.Pool(threads)
@@ -112,8 +113,9 @@ def twitter_query_wad(username):
 # twitter_bulk_query_wad() - process and return the Weapons/Alcohol/Drugs content of multiple Twitter usernames
 # example usage: twitter_bulk_query_wad(['POTUS', 'narendramodi'], threads=4)
 def twitter_bulk_query_wad(user_list, threads=2):
+    if current_cred >= len(all_creds):
+        raise Exception('API keys exhausted.')
     print(user_list)
-
     pool = mp.Pool(threads)
     pool_results = pool.map(twitter_query_wad, user_list)
     pool.terminate()

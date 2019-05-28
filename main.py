@@ -9,19 +9,14 @@ from werkzeug.utils import secure_filename
 from flask_basicauth import BasicAuth
 import creds
 
-
 app = Flask(__name__)
 app.config['BASIC_AUTH_USERNAME'] = creds.auth_token_penult
 app.config['BASIC_AUTH_PASSWORD'] = creds.auth_token_prelim
 app.config['BASIC_AUTH_FORCE'] = True
 basic_auth = BasicAuth(app)
 
-
-
-
 @app.route('/', methods=['GET', 'POST'])
 @basic_auth.required
-
 def home():
     error=None
     if request.method == 'POST':
@@ -38,14 +33,20 @@ def dashboard_display():
     if request.method == 'POST':
         error=None
         processor_count = int(request.form['processor-count'])
-        file = request.files['file']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join('csv/', filename))
+        try:
+            selected_file = request.files['file']
+        except Exception as e:
+            return render_template('home.html', error=str(e))
+        filename = secure_filename(selected_file.filename)
+        selected_file.save(os.path.join('csv/', filename))
         if filename.endswith(".csv") == False:
             error = "Please select a .csv file!"
             return render_template('home.html',errorcsv=error)
         usernames = csv_to_list('csv/' + filename)
-        engine.twitter_bulk_query_wad(usernames, threads=processor_count)
+        try:
+            engine.twitter_bulk_query_wad(usernames, threads=processor_count)
+        except Exception as e:
+            return render_template('home.html', error=str(e))
         return render_template('dashboard.html', usernames = usernames)
 
 
@@ -59,7 +60,11 @@ def data():
         elif not engine.check_user_exists(username):
             error = "Twitter user does not exist!"
             return render_template('home.html', error=error)
-        result = engine.concurrent_twitter_query_wad(username, threads=6)
+        processor_count = int(request.form['processor-count'])
+        try:
+            result = engine.concurrent_twitter_query_wad(username, threads=processor_count)
+        except Exception as e:
+            return render_template('home.html', error=str(e))
         print(engine.all_data)
         return redirect(url_for('tw_graph', username=username))
 
