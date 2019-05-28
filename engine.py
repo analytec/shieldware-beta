@@ -10,9 +10,18 @@ import json
 all_data = {}
 
 def getOutput(my_url_list):
+    global client
     output_list = []
     for my_url in my_url_list:
-        output_list.append(client.check('wad').set_url(my_url))
+        result = None
+        for cred in all_creds:
+            client = SightengineClient(cred[0], cred[1])
+            result = client.check('wad').set_url(my_url)
+            print(result)
+            if result['status'] == 'success':
+                print('Using credentials ' + cred[0] + ', ' + cred[1])
+                break
+        output_list.append(result)
     for output in output_list:  print(output)
     return output_list
 
