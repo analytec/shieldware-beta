@@ -3,14 +3,14 @@ import twitterdata
 import csv_utils
 import pprint
 from sightengine.client import SightengineClient
-from creds import client_access, client_key
+from creds import client_access, client_key, all_creds
 client = SightengineClient(client_access, client_key)
 
 all_data = {} # DO NOT DELETE THIS LINE
 
 def choose_api_key():
     global client
-    for pair in creds.all_creds:
+    for pair in all_creds:
         client = SightengineClient(pair[0], pair[1])
         result = client.check('wad')['status']
         if result == success:
