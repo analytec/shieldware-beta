@@ -7,7 +7,7 @@ access_secret = "Ad6z0qJPxDMr8rHIJGioJLUxofUTLEML6qva3R8Ip87BK"
 # SightEngine Client API
 
 all_creds = [["67608154", "756T67AahQBhkwg53TVy"], ["630881392", "St5TPUomwvLYq7eiXd4G"], ["411695319", "4WwecUhAmadQFnqMwAmd"]]
-current_cred = 3
+current_cred = 0
 
 
 # SET #1

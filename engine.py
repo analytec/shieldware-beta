@@ -3,24 +3,32 @@ import twitterdata
 import csv_utils
 import pprint
 from sightengine.client import SightengineClient
-from creds import client_access, client_key, all_creds
-client = SightengineClient(client_access, client_key)
+from creds import client_access, all_creds, current_cred
 import requests
 import json
+import sys
+
+client = SightengineClient(all_creds[current_cred][0], all_creds[current_cred][1])
+
 all_data = {}
 
 def getOutput(my_url_list):
-    global client
+    global client, all_creds, current_cred
     output_list = []
     for my_url in my_url_list:
-        result = None
-        for cred in all_creds:
-            client = SightengineClient(cred[0], cred[1])
-            result = client.check('wad').set_url(my_url)
-            print(result)
-            if result['status'] == 'success':
-                print('Using credentials ' + cred[0] + ', ' + cred[1])
+        result = client.check('wad').set_url(my_url)
+        while result['status'] != 'success':
+            if current_cred >= len(all_creds): # if last credential reached
+                current_cred = 0
+                raise Exception('API keys exhausted.')
                 break
+            current_cred += 1
+            client = SightengineClient(all_creds[current_cred][0], all_creds[current_cred][1])
+            result = client.check('wad').set_url(my_url)
+            print('Using credentials ' + all_creds[current_cred][0] + ', ' + all_creds[current_cred][1])
+            print(result)
+            print(result['status'])
+        print(result)
         output_list.append(result)
     for output in output_list:  print(output)
     return output_list
@@ -63,12 +71,14 @@ def wad_helper(output_list, query_type):
         res = output[query_type]
         results.append(res)
     return results
+    sys.exit(0)
 
 def concurrent_twitter_query_wad(username, threads):
     all_tweets = twitterdata.get_all_tweets(username)
     tweets_output = getOutput(all_tweets)
     pool = mp.Pool(threads)
     pool_results = pool.starmap(wad_helper, [(tweets_output, 'weapon'), (tweets_output, 'drugs'), (tweets_output, 'alcohol')])
+    pool.terminate()
     weapon_vals = pool_results[0]
     drug_vals = pool_results[1]
     alcohol_vals = pool_results[2]
@@ -106,6 +116,7 @@ def twitter_bulk_query_wad(user_list, threads=2):
 
     pool = mp.Pool(threads)
     pool_results = pool.map(twitter_query_wad, user_list)
+    pool.terminate()
     results = [{user_list[i] : pool_results[i]} for i in range(len(user_list))]
     for element in results:
         for key in element:
