@@ -12,18 +12,28 @@ def choose_api_key():
     global client
     for pair in all_creds:
         client = SightengineClient(pair[0], pair[1])
-        result = client.check('wad').set_url('https://lh3.googleusercontent.com/-EL0JJV39VAs/XOyDvKml4NI/AAAAAAAADPA/QEYS42h75H0KvxzUToVi3kBGmqKzlNZtQCK8BGAs/s512/2019-05-27.jpg')
-        print(result)
+        result = client.check('wad').set_url('https://lh3.googleusercontent.com/-EL0JJV39VAs/XOyDvKml4NI/AAAAAAAADPA/QEYS42h75H0KvxzUToVi3kBGmqKzlNZtQCK8BGAs/s512/2019-05-27.jpg')['result']
         if result == 'success':
             print("Using API credentials " + str(pair))
             break
 
 def getOutput(my_url_list):
     output_list = []
+    result = None
     for my_url in my_url_list:
-        choose_api_key()
-        output_list.append(client.check('wad').set_url(my_url))
-    for output in output_list:  print(output)
+        # API switching code
+        for pair in all_creds:
+            print('in loop in getOutput')
+            global client
+            #nonlocal result
+            client = SightengineClient(pair[0], pair[1])
+            result = client.check('wad').set_url(my_url)
+            if result['status'] == 'success':
+                break
+        output_list.append(result)
+        print(result)
+    for output in output_list:
+        print(output)
     return output_list
 
 def checkDrugs(output_list):
