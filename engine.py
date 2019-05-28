@@ -12,7 +12,8 @@ def choose_api_key():
     global client
     for pair in all_creds:
         client = SightengineClient(pair[0], pair[1])
-        result = client.check('wad').set_url('https://lh3.googleusercontent.com/-EL0JJV39VAs/XOyDvKml4NI/AAAAAAAADPA/QEYS42h75H0KvxzUToVi3kBGmqKzlNZtQCK8BGAs/s512/2019-05-27.jpg')['result']
+        result = client.check('wad').set_url('https://lh3.googleusercontent.com/-EL0JJV39VAs/XOyDvKml4NI/AAAAAAAADPA/QEYS42h75H0KvxzUToVi3kBGmqKzlNZtQCK8BGAs/s512/2019-05-27.jpg')
+        print(result)
         if result == 'success':
             print("Using API credentials " + str(pair))
             break
