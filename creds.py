@@ -7,13 +7,13 @@ access_secret = "Ad6z0qJPxDMr8rHIJGioJLUxofUTLEML6qva3R8Ip87BK"
 # SightEngine Client API
 
 # SET #1
-#client_access = "67608154"
-#client_key = "756T67AahQBhkwg53TVy"
+client_access = "67608154"
+client_key = "756T67AahQBhkwg53TVy"
 
 # SET #2
-# client_access = "630881392"
-# client_key = "St5TPUomwvLYq7eiXd4G"
+#client_access = "630881392"
+#client_key = "St5TPUomwvLYq7eiXd4G"
 
 # SET #3
-client_access = "411695319"
-client_key = "4WwecUhAmadQFnqMwAmd"
+#client_access = "411695319"
+#client_key = "4WwecUhAmadQFnqMwAmd"
