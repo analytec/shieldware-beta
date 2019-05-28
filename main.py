@@ -45,6 +45,14 @@ def dashboard_display():
             selected_file.save(os.path.join('csv/', filename))
 
         usernames = csv_to_list('csv/' + filename)
+        for individual_username in usernames:
+            if engine.check_user_exists(individual_username):
+                print(individual_username + " exists!")
+            else:
+                error_msg = str(individual_username) + " does not exist!"
+                return render_template('home.html', errorcsv=error_msg)
+                break
+
         try:
             engine.twitter_bulk_query_wad(usernames, threads=processor_count)
         except Exception as e:
