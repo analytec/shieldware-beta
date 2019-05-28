@@ -7,12 +7,12 @@ from csv_utils import *
 import os
 from werkzeug.utils import secure_filename
 from flask_basicauth import BasicAuth
-
+import creds
 
 
 app = Flask(__name__)
-app.config['BASIC_AUTH_USERNAME'] = engine.auth_token_penult
-app.config['BASIC_AUTH_PASSWORD'] = engine.auth_token_prelim
+app.config['BASIC_AUTH_USERNAME'] = creds.auth_token_penult
+app.config['BASIC_AUTH_PASSWORD'] = creds.auth_token_prelim
 app.config['BASIC_AUTH_FORCE'] = True
 basic_auth = BasicAuth(app)
 
