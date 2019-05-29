@@ -18,7 +18,7 @@ def getOutput(my_url_list):
     for my_url in my_url_list:
         if current_cred >= len(all_creds):
             current_cred = 0
-            raise Exception('API keys exhausted.')
+            raise Exception('You have reached the daily limit of 1500 requests!')
             break
         result = client.check('wad').set_url(my_url)
         while result['status'] != 'success':
@@ -76,10 +76,13 @@ def wad_helper(output_list, query_type):
     return results
     sys.exit(0)
 
-def concurrent_twitter_query_wad(username, threads):
+def concurrent_twitter_query_wad(username, tweets_num=10, threads=2):
     if current_cred >= len(all_creds):
         raise Exception('API keys exhausted.')
-    all_tweets = twitterdata.get_all_tweets(username)
+    try:
+        all_tweets = twitterdata.get_all_tweets(username, tweets_num)
+    except:
+        raise
     tweets_output = getOutput(all_tweets)
     pool = mp.Pool(threads)
     try:
@@ -101,12 +104,12 @@ def concurrent_twitter_query_wad(username, threads):
     return result
 
 
-def twitter_query_wad(username):
+def twitter_query_wad(username, tweets_num):
     global all_data
-    if current_cred >= all_creds:
+    if current_cred >= len(all_creds):
         raise Exception('You have reached the daily limit of 1500 requests!')
     try:
-        all_tweets = twitterdata.get_all_tweets(username)
+        all_tweets = twitterdata.get_all_tweets(username, tweets_num)
     except:
         raise
     tweets_output = getOutput(all_tweets)
@@ -124,13 +127,13 @@ def twitter_query_wad(username):
 
 # twitter_bulk_query_wad() - process and return the Weapons/Alcohol/Drugs content of multiple Twitter usernames
 # example usage: twitter_bulk_query_wad(['POTUS', 'narendramodi'], threads=4)
-def twitter_bulk_query_wad(user_list, threads=2):
+def twitter_bulk_query_wad(user_list, tweets_num=10, threads=2):
     if current_cred >= len(all_creds):
         raise Exception('You have reached the daily limit of 1500 requests!')
     print(user_list)
     pool = mp.Pool(threads)
     try:
-        pool_results = pool.map(twitter_query_wad, user_list)
+        pool_results = pool.starmap(twitter_query_wad, [(user, tweets_num) for user in user_list])
     except:
         raise
     finally:
@@ -151,5 +154,6 @@ def check_user_exists(user):
     my_response = my_response.decode("utf-8")
     my_response = my_response.replace("''","\"")
     my_response = json.loads(my_response)
+    print(my_response)
     my_response = my_response['valid']
     return not my_response

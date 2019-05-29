@@ -6,7 +6,7 @@ import sys
 
 from creds import consumer_key, consumer_secret, access_key, access_secret
 
-def get_all_tweets(screen_name):
+def get_all_tweets(screen_name, num):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_key, access_secret)
     api = tweepy.API(auth)
@@ -15,7 +15,7 @@ def get_all_tweets(screen_name):
     alltweets.extend(new_tweets)
     oldest = alltweets[-1].id - 1
 
-    while len(new_tweets) > 0 and len(new_tweets) < 10:
+    while len(new_tweets) > 0 and len(new_tweets) < num:
         new_tweets = api.user_timeline(screen_name = screen_name,count=200,max_id=oldest)
         alltweets.extend(new_tweets)
         oldest = alltweets[-1].id - 1
@@ -29,6 +29,6 @@ def get_all_tweets(screen_name):
             pass
         else:
             outtweets.append(str(tweet.entities['media'][0]['media_url']))
-    outtweets = outtweets[:11]
+    outtweets = outtweets[:(num+1)]
     print(outtweets)
     return outtweets

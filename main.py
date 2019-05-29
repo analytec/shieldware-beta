@@ -34,6 +34,10 @@ def dashboard_display():
         error=None
         processor_count = int(request.form['processor-count'])
         try:
+            tweets_num = int(request.form['tweets-num'])
+        except Exception as e:
+            return render_template('home.html', errorcsv="Please select a valid number of tweets.")
+        try:
             selected_file = request.files['file']
         except Exception as e:
             return render_template('home.html', errorcsv='Please select a CSV file to use.')
@@ -52,11 +56,11 @@ def dashboard_display():
                 error_msg = str(individual_username) + " does not exist!"
                 return render_template('home.html', errorcsv=error_msg)
                 break
-
         try:
-            engine.twitter_bulk_query_wad(usernames, threads=processor_count)
+            engine.twitter_bulk_query_wad(usernames, tweets_num=tweets_num, threads=processor_count)
         except Exception as e:
-            return render_template('home.html', errorcsv=str(e))
+            print(e)
+            return render_template('error_page.html', error=str(e))
         return render_template('dashboard.html', usernames = usernames)
 
 
@@ -64,16 +68,22 @@ def dashboard_display():
 def data():
     if request.method == 'POST':
         username = str(request.form['username-tw'])
+        try:
+            tweets_num = int(str(request.form['tweets-num']))
+            processor_count = int(request.form['processor-count'])
+        except Exception as e:
+            return render_template('home.html', error="Please enter a valid number of tweets and a valid processor count.")
         if not username:
             error = "Please enter a username before searching!"
             return render_template('home.html', error=error)
-        elif not engine.check_user_exists(username):
+        if not engine.check_user_exists(username):
             error = "Twitter user does not exist!"
             return render_template('home.html', error=error)
         try:
-            result = engine.concurrent_twitter_query_wad(username, threads=3)
+            result = engine.concurrent_twitter_query_wad(username, tweets_num=tweets_num, threads=processor_count)
         except Exception as e:
-            return render_template('home.html', error=str(e))
+            print(e)
+            return render_template('error_page.html', error=str(e))
         print(engine.all_data)
         return redirect(url_for('tw_graph', username=username))
 
