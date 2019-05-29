@@ -61,7 +61,9 @@ def dashboard_display():
         except Exception as e:
             print(e)
             return render_template('error_page.html', error=str(e))
-        return render_template('dashboard.html', usernames = usernames)
+        username_count = len(usernames)
+        div_size = username_count*20 + 10
+        return render_template('dashboard.html', usernames = usernames, div_size=div_size)
 
 
 @app.route('/data', methods=['GET','POST'])
