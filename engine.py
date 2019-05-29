@@ -104,7 +104,7 @@ def concurrent_twitter_query_wad(username, threads):
 def twitter_query_wad(username):
     global all_data
     if current_cred >= all_creds:
-        raise Exception('API keys exhausted.')
+        raise Exception('You have reached the daily limit of 1500 requests!')
     try:
         all_tweets = twitterdata.get_all_tweets(username)
     except:
@@ -113,7 +113,6 @@ def twitter_query_wad(username):
     weapon_vals = checkWeapons(tweets_output)
     alcohol_vals = checkAlcohol(tweets_output)
     drug_vals = checkDrugs(tweets_output)
-
     print('Data acquired for user: ' + username)
     result = {
         'weapons' : weapon_vals,
@@ -127,7 +126,7 @@ def twitter_query_wad(username):
 # example usage: twitter_bulk_query_wad(['POTUS', 'narendramodi'], threads=4)
 def twitter_bulk_query_wad(user_list, threads=2):
     if current_cred >= len(all_creds):
-        raise Exception('API keys exhausted.')
+        raise Exception('You have reached the daily limit of 1500 requests!')
     print(user_list)
     pool = mp.Pool(threads)
     try:
