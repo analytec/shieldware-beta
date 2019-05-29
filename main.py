@@ -66,7 +66,9 @@ def dashboard_display():
 
 @app.route('/data', methods=['GET','POST'])
 def data():
+    error=None
     if request.method == 'POST':
+        error=None
         username = str(request.form['username-tw'])
         try:
             tweets_num = int(str(request.form['tweets-num']))
