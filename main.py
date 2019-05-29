@@ -36,7 +36,7 @@ def dashboard_display():
         try:
             selected_file = request.files['file']
         except Exception as e:
-            return render_template('home.html', errorcsv=str(e))
+            return render_template('home.html', errorcsv='Please select a CSV file to use.')
         filename = secure_filename(selected_file.filename)
         if filename.endswith(".csv") == False:
             error = "Please select a .csv file!"
@@ -70,9 +70,8 @@ def data():
         elif not engine.check_user_exists(username):
             error = "Twitter user does not exist!"
             return render_template('home.html', error=error)
-        processor_count = int(request.form['processor-count'])
         try:
-            result = engine.concurrent_twitter_query_wad(username, threads=processor_count)
+            result = engine.concurrent_twitter_query_wad(username, threads=3)
         except Exception as e:
             return render_template('home.html', error=str(e))
         print(engine.all_data)
@@ -80,7 +79,6 @@ def data():
 
 @app.route('/tw_graph/<username>', methods=['GET', 'POST'])
 def tw_graph(username):
-    #if request.method == 'POST':
     x_vals = engine.gen_list(11)
     data = engine.all_data[username]
     print('WEAPON MAX: ' + str(max(data['weapons'])))

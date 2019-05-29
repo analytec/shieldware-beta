@@ -16,6 +16,10 @@ def getOutput(my_url_list):
     global client, all_creds, current_cred
     output_list = []
     for my_url in my_url_list:
+        if current_cred >= len(all_creds):
+            current_cred = 0
+            raise Exception('API keys exhausted.')
+            break
         result = client.check('wad').set_url(my_url)
         while result['status'] != 'success':
             if current_cred >= len(all_creds): # if last credential reached
@@ -78,8 +82,12 @@ def concurrent_twitter_query_wad(username, threads):
     all_tweets = twitterdata.get_all_tweets(username)
     tweets_output = getOutput(all_tweets)
     pool = mp.Pool(threads)
-    pool_results = pool.starmap(wad_helper, [(tweets_output, 'weapon'), (tweets_output, 'drugs'), (tweets_output, 'alcohol')])
-    pool.terminate()
+    try:
+        pool_results = pool.starmap(wad_helper, [(tweets_output, 'weapon'), (tweets_output, 'drugs'), (tweets_output, 'alcohol')])
+    except:
+        raise
+    finally:
+        pool.terminate()
     weapon_vals = pool_results[0]
     drug_vals = pool_results[1]
     alcohol_vals = pool_results[2]
@@ -95,7 +103,12 @@ def concurrent_twitter_query_wad(username, threads):
 
 def twitter_query_wad(username):
     global all_data
-    all_tweets = twitterdata.get_all_tweets(username)
+    if current_cred >= all_creds:
+        raise Exception('API keys exhausted.')
+    try:
+        all_tweets = twitterdata.get_all_tweets(username)
+    except:
+        raise
     tweets_output = getOutput(all_tweets)
     weapon_vals = checkWeapons(tweets_output)
     alcohol_vals = checkAlcohol(tweets_output)
@@ -117,8 +130,12 @@ def twitter_bulk_query_wad(user_list, threads=2):
         raise Exception('API keys exhausted.')
     print(user_list)
     pool = mp.Pool(threads)
-    pool_results = pool.map(twitter_query_wad, user_list)
-    pool.terminate()
+    try:
+        pool_results = pool.map(twitter_query_wad, user_list)
+    except:
+        raise
+    finally:
+        pool.terminate()
     results = [{user_list[i] : pool_results[i]} for i in range(len(user_list))]
     for element in results:
         for key in element:
