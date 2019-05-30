@@ -3,12 +3,10 @@ backcall==0.1.0
 beautifulsoup4==4.6.0
 build-utils==0.3.2
 cachetools==3.0.0
-cmake==3.13.3
 
 
 
 
-dlib==19.17.0
 
 Flask==1.0.2
 Flask-Babel==0.12.2
