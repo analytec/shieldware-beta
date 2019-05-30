@@ -30,7 +30,6 @@ Jinja2==2.10
 jsonschema==2.6.0
 jupyter-client==5.2.4
 jupyter-core==4.4.0
-Kivy==1.10.1
 
 geojson==2.4.1
 tweepy==3.7.0
