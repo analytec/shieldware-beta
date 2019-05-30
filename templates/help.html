@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Ramabhadra&display=swap" rel="stylesheet">
 
     <meta charset="UTF-8">
-    <title>Home | ShieldWare</title>
+    <title>Help | ShieldWare</title>
     <!-- Start of Async Drift Code -->
 <script>
 "use strict";
@@ -61,10 +61,10 @@ drift.load('9six78nrtm3y');
 		color:white;
 	}
     .image-example {
-      width: 30vw;
+      width: 50vw;
       min-width: 80px;
       text-align: center;
-      height: 380px;
+      height: 400px;
 	  margin: 5% auto;
       background-color: #ccc;
       padding-top: 20px;
@@ -136,51 +136,22 @@ div#loading {
 
 <body>
 	<center>
-		<h1> <strong>Shieldware </strong></h1>
+		<h1> <strong>Shieldware User's Guide</strong></h1>
 		<h2>
-			<form action="/help" method="get">
-				<input class="w3-btn w3-blue" type="submit" value="Click here"><br>to get started.
-			</form>
+            <form action="/" method="get">
+                <input class="w3-btn w3-blue" type="submit" value="Go Back Home">
+            </form>
 		</h2>
 	</center>
-	<div class="row">
-		<div>
-  			<div id="myProgress">
-				<div id="myBar"></div>
-			</div>
-		</div>
-	</div>
-	<div class="image-example" style="float:left">
-    	<form action="/data" method="post" style="float:left;">
-    		<strong>Twitter Username:</strong> <input id="username-tw" name="username-tw">
-			<br>
-			<strong>Number of Tweets to Analyze: </strong> <input id="tweets-num" name="tweets-num" value="10" type="number" style="width:80px;">
-			<br>
-			<strong>Number of Processors </strong>
-			<input id="processor-count" name="processor-count" type=number value="2" min="2" max="18" style="width:80px;">
-			<br>
-        	<input class="w3-btn w3-blue" name="submit" type="submit" value="Search" onclick="move()">
-    	</form>
-    	{% if error %}
-        	<p class="error"><strong>Error:</strong> {{ error }}</p>
-      	{% endif %}
-	</div>
 	<div class="image-example">
-		<br>
-    	<p><strong> Import Spreadsheet...</strong></p>
-      	<form action="/dashboard" method=post enctype=multipart/form-data>
-        	<div class="row">
-        		<div><input type=file name=file></div>
-      		</div>
-			<strong>Number of Tweets to Analyze Per User: </strong> <input id="tweets-num" name="tweets-num" value="10" type="number" style="width:80px;">
-			<br>
-      		<strong>Number of Processors: </strong>
-			<input id="processor-count" name="processor-count" type=number value="2" min="2" max="18" style="width:80px;">
-      		{% if errorcsv %}
-          		<p class="error"><strong>Error:</strong> {{ errorcsv }}</p>
-        	{% endif %}
-      		<div><input class="w3-btn w3-blue" type=submit value="Bulk Query"></div>
-      	</form>
+		<p><strong>What does Shieldware do?</strong><br>
+			Shieldware is a web application that finds the amount of dangerous content - specifically weapons, drugs, and alcohol - present in a user's social media image posts. Currently, Shieldware supports Twitter and is working on Facebook, Instagram, and YouTube integration.
+		</p>
+		<p><strong>How do I use Shieldware?</strong><br>
+			It's easy! Just head to the home page, specify a Twitter username and the number of recent posts you want analyzed, and wait for Shieldware to work its magic.
+			Once it's done, Shieldware will provide graphs of the weapon, drug, and alcohol content present in the tweets analyzed.
+			If you want to perform bulk searches, you can simply import a CSV file containing a username on each line (make sure that every line has ONLY a valid username on it, with preferably no whitespace!), specify the number of processors on your computer (to make sure we get your data to you as fast as possible), and you'll be able to access content graphs after Shieldware analyzes your data.
+		</p>
 	</div>
 </body>
 </html>

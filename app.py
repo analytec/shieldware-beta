@@ -27,6 +27,10 @@ def home():
         file.save(os.path.join('csv/', filename))
     return render_template('home.html', error=error)
 
+@app.route('/help', methods=['GET', 'POST'])
+def help():
+    return render_template('help.html')
+
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard_display():
     error=None
