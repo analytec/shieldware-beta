@@ -1,43 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="https://fonts.googleapis.com/css?family=Ramabhadra&display=swap" rel="stylesheet">
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="https://fonts.googleapis.com/css?family=Ramabhadra&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>Home | ShieldWare</title>
+	<script type="text/javascript" src="{{url_for('static', filename='js/drift.js')}}"></script>
+</head>
 
-    <meta charset="UTF-8">
-    <title>Home | ShieldWare</title>
-    <!-- Start of Async Drift Code -->
-<script>
-"use strict";
-
-!function() {
-  var t = window.driftt = window.drift = window.driftt || [];
-  if (!t.init) {
-    if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-    t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ],
-    t.factory = function(e) {
-      return function() {
-        var n = Array.prototype.slice.call(arguments);
-        return n.unshift(e), t.push(n), t;
-      };
-    }, t.methods.forEach(function(e) {
-      t[e] = t.factory(e);
-    }), t.load = function(t) {
-      var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-      var i = document.getElementsByTagName("script")[0];
-      i.parentNode.insertBefore(o, i);
-    };
-  }
-}();
-drift.SNIPPET_VERSION = '0.3.1';
-drift.load('9six78nrtm3y');
-</script>
-<!-- End of Async Drift Code -->
-  </head>
-  <style>
+<style>
     html {
         font-family: sans-serif;
         background-image: url(/static/background.jpg);
@@ -52,7 +25,6 @@ drift.load('9six78nrtm3y');
     p {
       color: white;
       font: 20px sans-serif;
-
     }
     h3 {
       color: white;
@@ -75,7 +47,6 @@ drift.load('9six78nrtm3y');
   .row {
   white-space: nowrap;
 }
-
 .row > div {
   width: 785px;
   display: inline-block;
@@ -84,7 +55,6 @@ h1 {
   font-family: 'Ramabhadra', sans-serif;
   color: white;
   font-size: 80px;
-
 }
 .error {
   color: red;
@@ -110,29 +80,13 @@ div#loading {
       height: 30px;
       background-color: #4CAF50;
     }
-  }
   .center {
     margin: auto;
     width: 50%;
     border: 3px solid green;
     padding: 10px;
   }
-  </style>
-  <script>
-  function move() {
-    var elem = document.getElementById("myBar");
-    var width = 1;
-    var id = setInterval(frame, 10);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-      } else {
-        width=width+.02;
-        elem.style.width = width + '%';
-      }
-    }
-  }
-</script>
+</style>
 
 <body>
 	<center>
@@ -154,12 +108,12 @@ div#loading {
     	<form action="/data" method="post" style="float:left;">
     		<strong>Twitter Username:</strong> <input id="username-tw" name="username-tw">
 			<br>
-			<strong>Number of Tweets to Analyze: </strong> <input id="tweets-num" name="tweets-num" value="10" type="number" min="2" style="width:80px;">
+			<strong>Number of Tweets to Analyze: </strong> <input id="tweets-num-single" name="tweets-num-single" value="10" type="number" min="2" style="width:80px;">
 			<br>
 			<strong>Number of Processors </strong>
-			<input id="processor-count" name="processor-count" type=number value="2" min="2" max="18" style="width:80px;">
+			<input id="processor-count-single" name="processor-count-single" type=number value="2" min="2" max="18" style="width:80px;">
 			<br>
-        	<input class="w3-btn w3-blue" name="submit" type="submit" value="Search" onclick="move()">
+        	<input class="w3-btn w3-blue" id="submit-single" name="submit-single" type="submit" value="Search" >
     	</form>
     	{% if error %}
         	<p class="error"><strong>Error:</strong> {{ error }}</p>
@@ -172,15 +126,17 @@ div#loading {
         	<div class="row">
         		<div><input type=file name=file></div>
       		</div>
-			<strong>Number of Tweets to Analyze Per User: </strong> <input id="tweets-num" name="tweets-num" value="10" min="2" type="number" style="width:80px;">
+			<strong>Number of Users in Spreadsheet: </strong> <input id="users-num" name="users-num" value="0" type="number" style="width:80px;">
+			<strong>Number of Tweets to Analyze Per User: </strong> <input id="tweets-num-bulk" name="tweets-num-bulk" value="10" min="2" type="number" style="width:80px;">
 			<br>
       		<strong>Number of Processors: </strong>
-			<input id="processor-count" name="processor-count" type=number value="2" min="2" max="18" style="width:80px;">
+			<input id="processor-count-bulk" name="processor-count-bulk" type=number value="2" min="2" max="18" style="width:80px;">
       		{% if errorcsv %}
           		<p class="error"><strong>Error:</strong> {{ errorcsv }}</p>
         	{% endif %}
-      		<div><input class="w3-btn w3-blue" type=submit value="Bulk Query"></div>
+      		<div><input class="w3-btn w3-blue" type="submit" id="submit-bulk" name="submit-bulk" value="Bulk Query"></div>
       	</form>
 	</div>
+	<script type="text/javascript" src="{{url_for('static', filename='js/home.js')}}"></script>
 </body>
 </html>

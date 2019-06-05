@@ -36,9 +36,9 @@ def dashboard_display():
     error=None
     if request.method == 'POST':
         error=None
-        processor_count = int(request.form['processor-count'])
+        processor_count = int(request.form['processor-count-bulk'])
         try:
-            tweets_num = int(request.form['tweets-num'])
+            tweets_num = int(request.form['tweets-num-bulk'])
             print('User has selected number of tweets as ' + str(tweets_num))
         except Exception as e:
             return render_template('home.html', errorcsv="Please select a valid number of tweets.")
@@ -78,8 +78,8 @@ def data():
         error=None
         username = str(request.form['username-tw'])
         try:
-            tweets_num = int(str(request.form['tweets-num']))
-            processor_count = int(request.form['processor-count'])
+            tweets_num = int(str(request.form['tweets-num-single']))
+            processor_count = int(request.form['processor-count-single'])
         except Exception as e:
             return render_template('home.html', error="Please enter a valid number of tweets and a valid processor count.")
         if not username:
