@@ -123,6 +123,7 @@ def twitter_query_wad(username, tweets_num):
         'drugs'   : drug_vals
     }
     all_data[username] = result
+    print(result)
     return result
 
 # twitter_bulk_query_wad() - process and return the Weapons/Alcohol/Drugs content of multiple Twitter usernames

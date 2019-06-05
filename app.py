@@ -39,6 +39,7 @@ def dashboard_display():
         processor_count = int(request.form['processor-count'])
         try:
             tweets_num = int(request.form['tweets-num'])
+            print('User has selected number of tweets as ' + str(tweets_num))
         except Exception as e:
             return render_template('home.html', errorcsv="Please select a valid number of tweets.")
         try:

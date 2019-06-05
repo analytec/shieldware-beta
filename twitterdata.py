@@ -29,6 +29,6 @@ def get_all_tweets(screen_name, num):
             pass
         else:
             outtweets.append(str(tweet.entities['media'][0]['media_url']))
-    outtweets = outtweets[:(num+1)]
+    outtweets = outtweets[:num]
     print(outtweets)
     return outtweets

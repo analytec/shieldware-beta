@@ -154,7 +154,7 @@ div#loading {
     	<form action="/data" method="post" style="float:left;">
     		<strong>Twitter Username:</strong> <input id="username-tw" name="username-tw">
 			<br>
-			<strong>Number of Tweets to Analyze: </strong> <input id="tweets-num" name="tweets-num" value="10" type="number" style="width:80px;">
+			<strong>Number of Tweets to Analyze: </strong> <input id="tweets-num" name="tweets-num" value="10" type="number" min="2" style="width:80px;">
 			<br>
 			<strong>Number of Processors </strong>
 			<input id="processor-count" name="processor-count" type=number value="2" min="2" max="18" style="width:80px;">
@@ -172,7 +172,7 @@ div#loading {
         	<div class="row">
         		<div><input type=file name=file></div>
       		</div>
-			<strong>Number of Tweets to Analyze Per User: </strong> <input id="tweets-num" name="tweets-num" value="10" type="number" style="width:80px;">
+			<strong>Number of Tweets to Analyze Per User: </strong> <input id="tweets-num" name="tweets-num" value="10" min="2" type="number" style="width:80px;">
 			<br>
       		<strong>Number of Processors: </strong>
 			<input id="processor-count" name="processor-count" type=number value="2" min="2" max="18" style="width:80px;">
